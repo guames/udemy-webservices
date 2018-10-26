@@ -1,4 +1,4 @@
-package com.ga.udemy.webservices.restfulwebservices;
+package com.ga.udemy.restful;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

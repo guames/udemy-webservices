@@ -1,5 +1,6 @@
 package com.ga.udemy.restful.controller;
 
+import com.ga.udemy.restful.exception.NotFoundException;
 import com.ga.udemy.restful.repository.User;
 import com.ga.udemy.restful.service.UserDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ public class UserResource {
 
     @Autowired
     private UserDaoService userDaoService;
-    private URI location;
 
     @GetMapping("/users")
     public List<User> retrieveAllUsers() {
@@ -24,18 +24,25 @@ public class UserResource {
 
     @GetMapping("/users/{id}")
     public User retrieveUser(@PathVariable Long id) {
-        return userDaoService.findOne(id);
+        User user = userDaoService.findOne(id);
+        if(user == null)
+            throw new NotFoundException("id-" + id);
+
+        return user;
     }
 
     @PostMapping("/users")
     public ResponseEntity<Object> createUser(@RequestBody User user) {
         User savedUser = userDaoService.save(user);
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(savedUser.getId()).toUri();
 
-        return ResponseEntity.created(location).build();
+        return ResponseEntity
+                .created(location)
+                .build();
 
     }
 }

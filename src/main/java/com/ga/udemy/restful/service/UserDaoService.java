@@ -2,7 +2,6 @@ package com.ga.udemy.restful.service;
 
 import com.ga.udemy.restful.repository.User;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

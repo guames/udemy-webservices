@@ -1,13 +1,12 @@
 package com.ga.udemy.restful.repository;
 
 import lombok.*;
-
 import java.util.Date;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @ToString
 public class User {
 
